@@ -3,8 +3,11 @@ package sg.edu.np.mad.madpractical;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,11 +43,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUserInfo() {
-        this.textViewName.setText(user.getName());
+        this.textViewName.setText(user.getName() + " " + generateRandomInt());
         this.textViewDescription.setText(user.getDescription());
     }
 
     private void updateUserFollowState() {
-        this.buttonFollow.setText(this.user.isFollowed() ? R.string.unfollow : R.string.follow);
+        if (this.user.isFollowed()) {
+            Toast.makeText(getApplicationContext(), "Followed", Toast.LENGTH_SHORT).show();
+            this.buttonFollow.setText(R.string.unfollow);
+            return;
+        }
+        this.buttonFollow.setText(R.string.follow);
+    }
+
+    private int generateRandomInt() {
+        return new Random().nextInt();
     }
 }
