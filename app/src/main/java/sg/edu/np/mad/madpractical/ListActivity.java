@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 public class ListActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,7 @@ public class ListActivity extends AppCompatActivity {
                 .setNegativeButton("close", null)
                 .setPositiveButton("view", (dialog, which) -> {
                     Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra("id", new Random().nextInt());
                     startActivity(intent);
                 })
                 .show());

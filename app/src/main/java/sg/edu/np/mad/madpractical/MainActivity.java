@@ -12,6 +12,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private User user;
+    private int random;
 
     private TextView textViewName;
     private TextView textViewDescription;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.random = getIntent().getIntExtra("id", 0);
 
         this.textViewName = findViewById(R.id.textViewName);
         this.textViewDescription = findViewById(R.id.textViewDescription);
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUserInfo() {
-        this.textViewName.setText(user.getName() + " " + generateRandomInt());
+        this.textViewName.setText(user.getName() + " " + this.random);
         this.textViewDescription.setText(user.getDescription());
     }
 
@@ -53,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
             this.buttonFollow.setText(R.string.unfollow);
             return;
         }
+        Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
         this.buttonFollow.setText(R.string.follow);
-    }
-
-    private int generateRandomInt() {
-        return new Random().nextInt();
     }
 }
