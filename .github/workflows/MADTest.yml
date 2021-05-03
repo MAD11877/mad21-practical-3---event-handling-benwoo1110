@@ -45,6 +45,23 @@ jobs:
   
       - name: Run Android Tests
         run: ./gradlew test
-        
+
+      - name: Run Instrumentation Tests (reactivecircus)
+        uses: reactivecircus/android-emulator-runner@v2.6.1
+        with:
+          api-level: 23
+          target: default
+          arch: x86
+          profile: Nexus 6
+          script: ./gradlew connectedCheck --stacktrace
+      
+      - name: Run Instrumentation Tests (reactivecircus)
+        uses: reactivecircus/android-emulator-runner@v2.6.1
+        with:
+          cmd: ./gradlew integrationTest
+          api: 23
+          tag: default
+          abi: x86
+
       - name: Build Project
         run: ./gradlew assemble
