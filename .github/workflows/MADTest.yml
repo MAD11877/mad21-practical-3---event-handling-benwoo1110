@@ -46,11 +46,20 @@ jobs:
       - name: Run Android Tests
         run: ./gradlew test
 
-      - name: Setup Instrumentation Tests (reactivecircus)
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 30
-          script: ./gradlew connectedCheck --stacktrace
-
       - name: Build Project
         run: ./gradlew assemble
+
+  test:
+    runs-on: macos-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
+    - name: run tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: ./gradlew connectedCheck
