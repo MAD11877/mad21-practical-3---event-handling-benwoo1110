@@ -50,7 +50,7 @@ jobs:
         run: ./gradlew assemble
 
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
     - name: checkout
       uses: actions/checkout@v2
