@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Test Scripts
         uses: actions/checkout@v2
         with:
-          repository: benwoo1110/MAD_JunitPrac2
+          repository: Lowkh/MAD_JunitPrac2
           ref: ben
           path: testDirectory
       - name: Check files
@@ -49,17 +49,17 @@ jobs:
       - name: Build Project
         run: ./gradlew assemble
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout
-      uses: actions/checkout@v2
+  # test:
+  #   runs-on: macos-latest
+  #   steps:
+  #   - name: checkout
+  #     uses: actions/checkout@v2
 
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+  #   - name: Make gradlew executable
+  #     run: chmod +x ./gradlew
 
-    - name: run tests
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 29
-        script: ./gradlew connectedAndroidTest --info
+  #   - name: run tests
+  #     uses: reactivecircus/android-emulator-runner@v2
+  #     with:
+  #       api-level: 29
+  #       script: ./gradlew connectedAndroidTest --info
