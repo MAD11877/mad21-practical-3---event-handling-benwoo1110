@@ -29,13 +29,13 @@ jobs:
         run: |
           UPATH=$(find . -path \*app/src/main/java/*/*.java | head -n 1 | sed 's_/[a-zA-Z0-9$]*[.]java__' | sed 's_./app/src/main/java/__' | sed 's_/_._g')
           echo $UPATH
-          sed -i "s_sg.*[;]_$UPATH;_" testDirectory/MainActivityTest.java
+          sed -i "s_sg.*[;]_$UPATH;_" testDirectory/*.java
           head -1 testDirectory/MainActivityTest.java
           cp app/src/main/res/layout/activity_main.xml testDirectory/test.xml
           cd testDirectory
           ls
-          go test -v
-          go run arrange.go
+          #go test -v
+          #go run arrange.go
           cd ..
           ls
           
@@ -47,3 +47,19 @@ jobs:
         
       - name: Build Project
         run: ./gradlew assemble
+
+
+  # test:
+  #   runs-on: macos-latest
+  #   steps:
+  #   - name: checkout
+  #     uses: actions/checkout@v2
+
+  #   - name: Make gradlew executable
+  #     run: chmod +x ./gradlew
+
+  #   - name: run tests
+  #     uses: reactivecircus/android-emulator-runner@v2
+  #     with:
+  #       api-level: 29
+  #       script: ./gradlew connectedAndroidTest --info
